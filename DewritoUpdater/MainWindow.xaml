@@ -464,9 +464,7 @@
 
     <Label x:Name="TitleLabel" Content="ELDEWRITO" Grid.Column="0" Foreground="White" VerticalAlignment="Center"
            HorizontalAlignment="Center" Margin="0,150,0,0" FontSize="40" FontFamily="Lato Semibold" />
-    <Button Grid.Column="0" Click="d_Click" Margin="127,344,0,192" Background="Transparent" HorizontalAlignment="Left"
-            Width="30" />
-    <Button Grid.Column="0" Style="{StaticResource AccentedSquareButtonStyle}" x:Name="BtnSkip" Content="Skip"
+        <Button Grid.Column="0" Style="{StaticResource AccentedSquareButtonStyle}" x:Name="BtnSkip" Content="Skip"
             Click="BTNSkip_OnClick"
             controls:ButtonHelper.PreserveTextCase="True" VerticalAlignment="Bottom" HorizontalAlignment="Left"
             Margin="20,0,0,100" Height="40" Width="100" BorderBrush="{x:Null}" FontSize="16" />

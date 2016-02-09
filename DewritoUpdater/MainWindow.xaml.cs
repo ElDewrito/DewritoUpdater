@@ -147,7 +147,7 @@ namespace Dewritwo
                 try
                 {
                     ChangelogContent.Text =
-                      wc.DownloadString("https://raw.githubusercontent.com/FishPhd/DewritoUpdater/master/changelog.data");
+                      wc.DownloadString("https://raw.githubusercontent.com/no1dead/DewritoUpdater/master/changelog.data");
                 }
                 catch
                 {
@@ -602,10 +602,6 @@ namespace Dewritwo
                 FlyoutHandler(FlyoutLauncherSettings);
         }
 
-        private void d_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("http://i.imgur.com/cc9ZcIO.gif");
-        }
 
         private void forceUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -1327,7 +1323,7 @@ namespace Dewritwo
                     L.Fill = new SolidColorBrush(light);
                     E.Fill = new SolidColorBrush(light);
                 }
-                TitleLabel.Content = "Where is your god now";
+                TitleLabel.Content = "ELDEWRITO";
             }
         }
 
@@ -1371,7 +1367,7 @@ namespace Dewritwo
                     L.Fill = new SolidColorBrush(light);
                     E.Fill = new SolidColorBrush(light);
                 }
-                TitleLabel.Content = "Where is your god now";
+                TitleLabel.Content = "ELDEWRITO";
             }
 
             if (Cfg.LauncherConfigFile["Launcher.Theme"] == "BaseDark" && Cfg.LauncherConfigFile["Launcher.Color"] == "yellow")
@@ -1717,7 +1713,7 @@ namespace Dewritwo
                 TitleLabel.SetResourceReference(ForegroundProperty, "AccentColorBrush");
                 L.Fill = new SolidColorBrush(light);
                 E.Fill = new SolidColorBrush(light);
-                TitleLabel.Content = "Where is your god now";
+                TitleLabel.Content = "ELDEWRITO";
             }
         }
 
