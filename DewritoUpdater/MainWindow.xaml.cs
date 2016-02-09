@@ -81,17 +81,24 @@ namespace Dewritwo
             {
                 AppendDebugLine("Cfg Load Error: Resetting Launcher Specific Settings", Color.FromRgb(255, 0, 0));
                 if (File.Exists("~/dewrito_prefs.cfg"))
+                {
+                    File.Copy("~/dewrito_prefs.cfg", "~/dewrito_prefs_broken.cfg");
                     File.Delete("~/dewrito_prefs.cfg");
+                }
                 if (File.Exists("~/launcher_prefs.cfg"))
+                {
+                    File.Copy("~/launcher_prefs.cfg", "~/launcher_prefs_broken.cfg");
                     File.Delete("~/launcher_prefs.cfg");
+                }
                 Cfg.Initial("cfg");
                 Load();
                 AppendDebugLine("Cfg Reload Complete", Color.FromRgb(0, 255, 0));
             }
 
             if (Directory.Exists("bink") && Cfg.LauncherConfigFile["Launcher.IntroSkip"] == "1")
+            {
                 Directory.Move("bink", "bink_disabled");
-
+            }
             try
             {
                 using (var wc = new WebClient())
@@ -470,14 +477,17 @@ namespace Dewritwo
                 foreach (var x in files)
                 {
                     var keyName = x.Key;
-                    if (_fileHashes != null && !_fileHashes.ContainsKey(keyName) &&
-                        _fileHashes.ContainsKey(keyName.Replace(@"\", @"/")))
+                    if (_fileHashes != null && !_fileHashes.ContainsKey(keyName) && _fileHashes.ContainsKey(keyName.Replace(@"\", @"/")))
+                    {
                         keyName = keyName.Replace(@"\", @"/");
+                    }
 
                     if (_fileHashes != null && !_fileHashes.ContainsKey(keyName))
                     {
                         if (_skipFileExtensions.Contains(Path.GetExtension(keyName)))
+                        {
                             continue;
+                        }
 
                         AppendDebugLine("Failed to find required game file \"" + x.Key + "\"", Color.FromRgb(255, 0, 0));
                         AppendDebugLine("Please redo your ElDorito installation", Color.FromRgb(255, 0, 0));
@@ -494,10 +504,15 @@ namespace Dewritwo
                         return false;
                     }
 
-                    if (_fileHashes == null || _fileHashes[keyName] == x.Value.ToString().Replace("\"", "")) continue;
-                    if (_skipFileExtensions.Contains(Path.GetExtension(keyName)) ||
-                        _skipFiles.Contains(Path.GetFileName(keyName)))
+                    if (_fileHashes == null || _fileHashes[keyName] == x.Value.ToString().Replace("\"", ""))
+                    { 
                         continue;
+                    }
+
+                    if (_skipFileExtensions.Contains(Path.GetExtension(keyName)) || _skipFiles.Contains(Path.GetFileName(keyName)))
+                    {
+                        continue;
+                    }
 
                     AppendDebugLine("Game file \"" + keyName + "\" data is invalid.", Color.FromRgb(255, 0, 0));
                     AppendDebugLine("Your hash: " + _fileHashes[keyName], Color.FromRgb(255, 0, 0));
@@ -507,8 +522,7 @@ namespace Dewritwo
                     {
                         BtnAction.Content = "Error";
                         BtnSkip.Content = "Ignore";
-                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") &&
-                  Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
                         {
                             FlyoutHandler(FlyoutDebug);
                         }
@@ -523,8 +537,9 @@ namespace Dewritwo
         private void HashFilesInFolder(string basePath, string dirPath = "")
         {
             if (_fileHashes == null)
+            {
                 _fileHashes = new Dictionary<string, string>();
-
+            }
             if (string.IsNullOrEmpty(dirPath))
             {
                 dirPath = basePath;
@@ -535,7 +550,9 @@ namespace Dewritwo
             {
                 var dirName = Path.GetFileName(folder);
                 if (_skipFolders.Contains(dirName))
+                {
                     continue;
+                }
                 HashFilesInFolder(basePath, folder);
             }
 
@@ -550,9 +567,13 @@ namespace Dewritwo
 
                         var fileKey = file.Replace(basePath, "");
                         if ((fileKey.StartsWith(@"\") || fileKey.StartsWith("/")) && fileKey.Length > 1)
+                        {
                             fileKey = fileKey.Substring(1);
+                        }
                         if (!_fileHashes.ContainsKey(fileKey))
+                        {
                             _fileHashes.Add(fileKey, hashStr);
+                        }
                     }
                 }
                 catch
@@ -562,8 +583,7 @@ namespace Dewritwo
                     {
                         BtnAction.Content = "Error";
                         BtnSkip.Content = "Ignore";
-                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") &&
-                  Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
                         {
                             FlyoutHandler(FlyoutDebug);
                         }
@@ -581,7 +601,9 @@ namespace Dewritwo
             sender.IsOpen = true;
             foreach (Flyout fly in allFlyouts.FindChildren<Flyout>())
                 if (fly.Header != sender.Header)
+                {
                     await Task.Run(() => AsyncFlyoutHandler(fly));
+                }
 
             sender.IsOpen = true;
         }
@@ -597,9 +619,11 @@ namespace Dewritwo
         private void LauncherSettings_Click(object sender, RoutedEventArgs e)
         {
             if (FlyoutLauncherSettings.IsOpen)
+            {
                 FlyoutLauncherSettings.IsOpen = false;
-            else
+            }else{
                 FlyoutHandler(FlyoutLauncherSettings);
+            }
         }
 
 
@@ -615,9 +639,7 @@ namespace Dewritwo
             {
                 if (Cfg.LauncherConfigFile["Launcher.PlayerMessage"] == "0")
                 {
-                    var messageWindow =
-                      new MsgBox("This will update your spartan live!",
-                        "Just edit settings in the launcher while the game is open.");
+                    var messageWindow = new MsgBox("This will update your spartan live!","Just edit settings in the launcher while the game is open.");
 
                     messageWindow.Show();
                     messageWindow.Focus();
@@ -633,8 +655,7 @@ namespace Dewritwo
                 if (Cfg.LauncherConfigFile["Launcher.PlayerMessage"] == "0")
                 {
                     var messageWindow =
-                      new MsgBox("This will update your spartan live!",
-                        "Just edit settings in the launcher while the game is open.");
+                      new MsgBox("This will update your spartan live!","Just edit settings in the launcher while the game is open.");
 
                     messageWindow.Show();
                     messageWindow.Focus();
@@ -649,9 +670,11 @@ namespace Dewritwo
         private void Changelog_OnClick(object sender, RoutedEventArgs e)
         {
             if (FlyoutChangelog.IsOpen)
+            {
                 FlyoutChangelog.IsOpen = false;
-            else
+            }else{
                 FlyoutHandler(FlyoutChangelog);
+            }
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -675,9 +698,11 @@ namespace Dewritwo
         private void Debug_OnClick(object sender, RoutedEventArgs e)
         {
             if (FlyoutDebug.IsOpen)
+            {
                 FlyoutDebug.IsOpen = false;
-            else
+            }else{ 
                 FlyoutHandler(FlyoutDebug);
+            }
         }
 
         #endregion
@@ -706,8 +731,7 @@ namespace Dewritwo
                     {
                         AppendDebugLine("Cannot locate eldorado.exe. Are you running in the right location?",
                 Color.FromRgb(255, 0, 0));
-                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") &&
-                  Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
                         {
                             FlyoutHandler(FlyoutDebug);
                         }
@@ -715,9 +739,13 @@ namespace Dewritwo
                 }
 
                 if (Cfg.LauncherConfigFile["Launcher.Random"] == "1")
+                {
                     RandomArmor();
+                }
                 if (Cfg.LauncherConfigFile["Launcher.Close"] == "1")
+                {
                     Application.Current.Shutdown();
+                }
             }
             else if (BtnAction.Content.Equals("Update"))
             {
@@ -736,8 +764,7 @@ namespace Dewritwo
                     {
                         BtnAction.Content = "Error";
                         BtnSkip.Content = "Ignore";
-                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") &&
-                  Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+                        if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
                         {
                             FlyoutHandler(FlyoutDebug);
                         }
@@ -766,15 +793,22 @@ namespace Dewritwo
         private void BTNSkip_OnClick(object sender, RoutedEventArgs e)
         {
             if (BtnSkip.Content.Equals("Ignore"))
+            {
                 AppendDebugLine("Error ignored. You may now play (with possibility of problems)", Color.FromRgb(255, 255, 255));
-            else if (BtnSkip.Content.Equals("Skip"))
-                AppendDebugLine("Validating skipped. You may now play (with possibility of problems)",
-                  Color.FromRgb(255, 255, 255));
-            var fade = (Storyboard)TryFindResource("Fade");
-            fade.Stop();
-            BtnAction.Content = "Play Game";
-            BtnSkip.Visibility = Visibility.Hidden;
-        }
+            }
+            else
+            {
+                if (BtnSkip.Content.Equals("Skip"))
+                {
+                    AppendDebugLine("Validating skipped. You may now play (with possibility of problems)",
+                      Color.FromRgb(255, 255, 255));
+                }
+                var fade = (Storyboard)TryFindResource("Fade");
+                fade.Stop();
+                BtnAction.Content = "Play Game";
+                BtnSkip.Visibility = Visibility.Hidden;
+            }
+            }
 
         private void Reddit_OnClick(object sender, RoutedEventArgs e)
         {
@@ -788,7 +822,7 @@ namespace Dewritwo
 
         private void Github_OnClick(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/fishphd");
+            Process.Start("https://github.com/no1dead/DewritoUpdater");
         }
 
         #endregion

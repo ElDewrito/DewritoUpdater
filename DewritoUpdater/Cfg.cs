@@ -132,22 +132,8 @@ namespace Dewritwo
       if (!cfgFileExists || error == "cfg")
       {
         SetVariable("Game.MenuURL", "http://scooterpsu.github.io/", ref ConfigFile, false);
-        SetVariable("Game.LanguageID", "0", ref ConfigFile, false);
-        SetVariable("Game.SkipLauncher", "0", ref ConfigFile, false);
+        SetVariable("Game.SkipLauncher", "1", ref ConfigFile, false);
         SetVariable("Game.LogName", "dorito.log", ref ConfigFile, false);
-        SetVariable("Player.Armor.Accessory", "air_assault", ref ConfigFile, false);
-        SetVariable("Player.Armor.Arms", "air_assault", ref ConfigFile, false);
-        SetVariable("Player.Armor.Chest", "air_assault", ref ConfigFile, false);
-        SetVariable("Player.Armor.Helmet", "air_assault", ref ConfigFile, false);
-        SetVariable("Player.Armor.Legs", "air_assault", ref ConfigFile, false);
-        SetVariable("Player.Armor.Pelvis", "", ref ConfigFile, false);
-        SetVariable("Player.Armor.Shoulders", "air_assault", ref ConfigFile, false);
-        SetVariable("Player.Colors.Primary", "#698029", ref ConfigFile, false);
-        SetVariable("Player.Colors.Secondary", "#698029", ref ConfigFile, false);
-        SetVariable("Player.Colors.Visor", "#FFA000", ref ConfigFile, false);
-        SetVariable("Player.Colors.Lights", "#000000", ref ConfigFile, false);
-        SetVariable("Player.Colors.Holo", "#000000", ref ConfigFile, false);
-        SetVariable("Player.Name", "", ref ConfigFile, false);
         SetVariable("Player.PrivKeyNote",
           "The PrivKey below is used to keep your stats safe.Treat it like a password and don't share it with anyone!",
           ref ConfigFile, false);
@@ -159,9 +145,6 @@ namespace Dewritwo
         SetVariable("Server.MaxPlayers", "16", ref ConfigFile, false);
         SetVariable("Server.Port", "11775", ref ConfigFile, false);
         SetVariable("Server.ShouldAnnounce", "1", ref ConfigFile, false);
-        SetVariable("Server.SprintEnabled", "0", ref ConfigFile, false);
-        SetVariable("Server.AssassinationEnabled", "0", ref ConfigFile, false);
-        SetVariable("Server.UnlimitedSprint", "0", ref ConfigFile, false);
         SetVariable("Camera.Crosshair", "0", ref ConfigFile, false);
         SetVariable("Camera.FOV", "90.000000", ref ConfigFile, false);
         SetVariable("Camera.HideHUD", "0", ref ConfigFile, false);
