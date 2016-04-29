@@ -478,7 +478,7 @@
         		BorderBrush="{x:Null}" FontSize="16" Margin="10,0,227,0" />
         </Grid>
         <Rectangle Height="30" MouseDown="Reddit_OnClick"
-        	ToolTip="Halo Online Subreddit" Margin="234,560,133,13" Grid.Column="1">
+        	ToolTip="Halo Online Subreddit" Margin="294,560,73,13" Grid.Column="1">
             <Rectangle.OpacityMask>
                 <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_social_reddit}" />
             </Rectangle.OpacityMask>
@@ -494,26 +494,9 @@
             </Rectangle.Style>
         </Rectangle>
         <Rectangle Height="30" MouseDown="Github_OnClick"
-        	ToolTip="Launcher Github" Margin="294,560,73,13" Grid.Column="1">
+        	ToolTip="Launcher Github" Margin="354,560,13,13" Grid.Column="1">
             <Rectangle.OpacityMask>
                 <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_social_github_octocat_solid}" />
-            </Rectangle.OpacityMask>
-            <Rectangle.Style>
-                <Style TargetType="{x:Type Rectangle}">
-                    <Setter Property="Fill" Value="{DynamicResource AccentColorBrush2}" />
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Fill" Value="{DynamicResource AccentColorBrush}" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Rectangle.Style>
-        </Rectangle>
-        <Rectangle Height="30" MouseDown="Twitter_OnClick"
-        	ToolTip="Launcher Dev Twitter" Margin="354,560,13,13" Grid.Column="1">
-            <Rectangle.OpacityMask>
-                <VisualBrush Stretch="Uniform"
-        			Visual="{StaticResource appbar_twitter_bird}" />
             </Rectangle.OpacityMask>
             <Rectangle.Style>
                 <Style TargetType="{x:Type Rectangle}">

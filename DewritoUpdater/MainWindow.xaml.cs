@@ -825,14 +825,9 @@ namespace Dewritwo
 			Process.Start("https://www.reddit.com/r/HaloOnline/");
 		}
 
-		private void Twitter_OnClick(object sender, RoutedEventArgs e)
-		{
-			Process.Start("https://twitter.com/FishPhdOfficial");
-		}
-
 		private void Github_OnClick(object sender, RoutedEventArgs e)
 		{
-			Process.Start("https://github.com/no1dead/DewritoUpdater");
+			Process.Start("https://github.com/ElDewrito/ElDorito");
 		}
 
 		#endregion
