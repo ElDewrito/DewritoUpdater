@@ -467,7 +467,7 @@
         </Viewbox>
 
         <Label x:Name="TitleLabel" Content="ELDEWRITO" Grid.Column="1" Foreground="White" VerticalAlignment="Center"
-           HorizontalAlignment="Center" Margin="89,348,89,197" FontSize="40" FontFamily="Lato Semibold" />
+           HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="10,348,10,197" FontSize="40" FontFamily="Lato Semibold" Width="377" />
         <Grid Margin="0,513,10,40">
             <Button Grid.Column="0" Style="{StaticResource AccentedSquareButtonStyle}" x:Name="BtnSkip" Content="Skip"
         		Click="BTNSkip_OnClick"
