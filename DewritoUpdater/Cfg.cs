@@ -176,5 +176,18 @@ namespace Dewritwo
 			SaveConfigFile("launcher_prefs.cfg", LauncherConfigFile);
 			SaveConfigFile("dewrito_prefs.cfg", ConfigFile);
 		}
+
+		public static string GetConfigVariable(string key, string defaultValue)
+		{
+			if (ConfigFile.ContainsKey(key))
+			{
+				return ConfigFile[key];
+			}
+			else
+			{
+				ConfigFile[key] = defaultValue;
+				return defaultValue;
+			}
+		}
 	}
 }

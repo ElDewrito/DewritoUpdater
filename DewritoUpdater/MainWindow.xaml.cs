@@ -1552,41 +1552,37 @@ namespace Dewritwo
 		private void Load()
 		{
 			//Customization
-			if (Cfg.ConfigFile["Player.Name"] == "Forgot")
-				Cfg.SetVariable("Player.Name", "", ref Cfg.ConfigFile);
-			NameBox.Text = Cfg.ConfigFile["Player.Name"];
-			Weapon.SelectedValue = Cfg.ConfigFile.ContainsKey("Player.RenderWeapon")
-			  ? Cfg.ConfigFile["Player.RenderWeapon"]
-			  : Cfg.ConfigFile["Player.RenderWeapon"] = "assault_rifle";
-			Helmet.SelectedValue = Cfg.ConfigFile["Player.Armor.Helmet"];
-			Chest.SelectedValue = Cfg.ConfigFile["Player.Armor.Chest"];
-			Shoulders.SelectedValue = Cfg.ConfigFile["Player.Armor.Shoulders"];
-			Arms.SelectedValue = Cfg.ConfigFile["Player.Armor.Arms"];
-			Legs.SelectedValue = Cfg.ConfigFile["Player.Armor.Legs"];
-			var convertFromString1 = ColorConverter.ConvertFromString(Cfg.ConfigFile["Player.Colors.Primary"]);
+			NameBox.Text = Cfg.GetConfigVariable("Player.Name", "");
+			Weapon.SelectedValue = Cfg.GetConfigVariable("Player.RenderWeapon", "assault_rifle");
+			Helmet.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Helmet", "air_assault");
+			Chest.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Chest", "air_assault");
+			Shoulders.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Shoulders", "air_assault");
+			Arms.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Arms", "air_assault");
+			Legs.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Legs", "air_assault");
+			var convertFromString1 = ColorConverter.ConvertFromString(Cfg.GetConfigVariable("Player.Colors.Primary", "#000000"));
 			if (convertFromString1 != null)
 				ClrPrimary.SelectedColor = (Color)convertFromString1;
-			var o = ColorConverter.ConvertFromString(Cfg.ConfigFile["Player.Colors.Secondary"]);
+			var o = ColorConverter.ConvertFromString(Cfg.GetConfigVariable("Player.Colors.Secondary", "#000000"));
 			if (o != null)
 				ClrSecondary.SelectedColor = (Color)o;
-			var s = ColorConverter.ConvertFromString(Cfg.ConfigFile["Player.Colors.Visor"]);
+			var s = ColorConverter.ConvertFromString(Cfg.GetConfigVariable("Player.Colors.Visor", "#000000"));
 			if (s != null)
 				ClrVisor.SelectedColor = (Color)s;
-			var fromString = ColorConverter.ConvertFromString(Cfg.ConfigFile["Player.Colors.Lights"]);
+			var fromString = ColorConverter.ConvertFromString(Cfg.GetConfigVariable("Player.Colors.Lights", "#000000"));
 			if (fromString != null)
 				ClrLights.SelectedColor = (Color)fromString;
-			var convertFromString = ColorConverter.ConvertFromString(Cfg.ConfigFile["Player.Colors.Holo"]);
+			var convertFromString = ColorConverter.ConvertFromString(Cfg.GetConfigVariable("Player.Colors.Holo", "#000000"));
 			if (convertFromString != null)
 				ClrHolo.SelectedColor = (Color)convertFromString;
 			//Settings
-			Fov.Value = Convert.ToDouble(Cfg.ConfigFile["Camera.FOV"]);
-			CrosshairCenter.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["Camera.Crosshair"]));
-			RawInput.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["Input.RawInput"]));
-			ServerName.Text = Cfg.ConfigFile["Server.Name"];
-			ServerPassword.Password = Cfg.ConfigFile["Server.Password"];
-			MaxPlayer.Value = Convert.ToDouble(Cfg.ConfigFile["Server.MaxPlayers"]);
-			StartTimer.Value = Convert.ToDouble(Cfg.ConfigFile["Server.Countdown"]);
-			ChkSprint.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["Server.SprintEnabled"]));
+			Fov.Value = Convert.ToDouble(Cfg.GetConfigVariable("Camera.FOV", "90.000000"));
+			CrosshairCenter.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Camera.Crosshair", "0")));
+			RawInput.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Input.RawInput", "1")));
+			ServerName.Text = Cfg.GetConfigVariable("Server.Name", "Halo Online Server");
+			ServerPassword.Password = Cfg.GetConfigVariable("Server.Password", "");
+			MaxPlayer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.MaxPlayers", "16"));
+			StartTimer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.Countdown", "5"));
+			ChkSprint.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.SprintEnabled", "1")));
 			//Launcher Settings
 			try
 			{
@@ -1602,12 +1598,12 @@ namespace Dewritwo
 			}
 
 			//VoIP Settings
-			ChkVoIpEnabled.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["VoIP.Enabled"]));
-			Agc.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["VoIP.AGC"]));
-			Echo.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["VoIP.EchoCancellation"]));
-			VolumeModifier.Value = Convert.ToDouble(Cfg.ConfigFile["VoIP.VolumeModifier"]);
-			Ptt.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.ConfigFile["VoIP.PushToTalk"]));
-			Val.Value = Convert.ToDouble(Cfg.ConfigFile["VoIP.VoiceActivationLevel"]);
+			ChkVoIpEnabled.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.Enabled", "1")));
+			Agc.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.AGC", "1")));
+			Echo.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.EchoCancellation", "1")));
+			VolumeModifier.Value = Convert.ToDouble(Cfg.GetConfigVariable("VoIP.VolumeModifier", "6"));
+			Ptt.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.PushToTalk", "1")));
+			Val.Value = Convert.ToDouble(Cfg.GetConfigVariable("VoIP.VoiceActivationLevel", "-45.000000"));
 			//Auto Exec
 			if (!File.Exists("autoexec.cfg"))
 				File.Create("autoexec.cfg");
