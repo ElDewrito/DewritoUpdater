@@ -92,7 +92,7 @@ namespace DewritoUpdater
 			  ["DMG DMR"] = "dmr_variant_4",
 			  ["RNG DMR"] = "dmr_variant_5",
 			  ["PWR DMR"] = "dmr_variant_6",
-			  ["Plasma Rifle"] = "plasma_rifle_variant_6",
+			  ["Plasma Rifle"] = "plasma_rifle",
 			  ["PWR Plasma Rifle"] = "plasma_rifle_variant_6",
 			  ["SMG"] = "smg",
 			  ["ROF SMG"] = "smg_variant_1",
