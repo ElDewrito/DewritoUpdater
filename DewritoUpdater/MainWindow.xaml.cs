@@ -28,6 +28,7 @@ namespace Dewritwo
 
 		private Dictionary<int, string> _doritoKey;
 		private bool _updateText = true;
+		private bool skipUpdate = false;
 		private string _keyValue;
 		private string _eldoritoLatestVersion;
 		private FileVersionInfo _eldoritoVersion;
@@ -269,12 +270,15 @@ namespace Dewritwo
 
 			AppendDebugLine("An update is available. (" + _latestUpdateVersion + ")", Color.FromRgb(255, 255, 0));
 
-			BtnAction.Dispatcher.Invoke(
-			  () =>
-			  {
-				  BtnAction.Content = "Update";
-				  fade.Stop(); // Start animation
-			  });
+			if (!skipUpdate)
+			{
+				BtnAction.Dispatcher.Invoke(
+				  () =>
+				  {
+					  BtnAction.Content = "Update";
+					  fade.Stop(); // Start animation
+				  });
+			}
 		}
 
 		private bool ProcessUpdateData()
@@ -581,15 +585,18 @@ namespace Dewritwo
 				catch
 				{
 					AppendDebugLine("Game file validation Error", Color.FromRgb(255, 0, 0));
-					Dispatcher.Invoke(() =>
+					if (!skipUpdate)
 					{
-						BtnAction.Content = "Error";
-						BtnSkip.Content = "Ignore";
-						if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+						Dispatcher.Invoke(() =>
 						{
-							FlyoutHandler(FlyoutDebug);
-						}
-					});
+							BtnAction.Content = "Error";
+							BtnSkip.Content = "Ignore";
+							if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+							{
+								FlyoutHandler(FlyoutDebug);
+							}
+						});
+					}
 				}
 			}
 		}
@@ -800,24 +807,22 @@ namespace Dewritwo
 
 		private void BTNSkip_OnClick(object sender, RoutedEventArgs e)
 		{
+			skipUpdate = true;
+			_validateThread.Abort();
 			if (BtnSkip.Content.Equals("Ignore"))
 			{
 				AppendDebugLine("Error ignored. You may now play (with possibility of problems)", Color.FromRgb(255, 255, 255));
 				BtnAction.Content = "Play Game";
 				BtnSkip.Visibility = Visibility.Hidden;
 			}
-			else
+			else if (BtnSkip.Content.Equals("Skip"))
 			{
-				if (BtnSkip.Content.Equals("Skip"))
-				{
-					AppendDebugLine("Validating skipped. You may now play (with possibility of problems)",
-					  Color.FromRgb(255, 255, 255));
-				}
-				var fade = (Storyboard)TryFindResource("Fade");
-				fade.Stop();
-				BtnAction.Content = "Play Game";
-				BtnSkip.Visibility = Visibility.Hidden;
+				AppendDebugLine("Validating skipped. You may now play (with possibility of problems)", Color.FromRgb(255, 255, 255));
 			}
+			var fade = (Storyboard)TryFindResource("Fade");
+			fade.Stop();
+			BtnAction.Content = "Play Game";
+			BtnSkip.Visibility = Visibility.Hidden;
 		}
 
 		private void Reddit_OnClick(object sender, RoutedEventArgs e)
