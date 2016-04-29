@@ -494,7 +494,7 @@
             </Rectangle.Style>
         </Rectangle>
         <Rectangle Height="30" MouseDown="Github_OnClick"
-        	ToolTip="Launcher Github" Margin="354,560,13,13" Grid.Column="1">
+        	ToolTip="ElDorito Github" Margin="354,560,13,13" Grid.Column="1">
             <Rectangle.OpacityMask>
                 <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_social_github_octocat_solid}" />
             </Rectangle.OpacityMask>
