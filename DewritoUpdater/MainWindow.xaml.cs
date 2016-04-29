@@ -803,6 +803,8 @@ namespace Dewritwo
 			if (BtnSkip.Content.Equals("Ignore"))
 			{
 				AppendDebugLine("Error ignored. You may now play (with possibility of problems)", Color.FromRgb(255, 255, 255));
+				BtnAction.Content = "Play Game";
+				BtnSkip.Visibility = Visibility.Hidden;
 			}
 			else
 			{
