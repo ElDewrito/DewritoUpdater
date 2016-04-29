@@ -1602,8 +1602,8 @@ namespace DewritoUpdater
 			//Launcher Settings
 			try
 			{
-				Colors.SelectedValue = Cfg.LauncherConfigFile["Launcher.Color"];
-				Themes.SelectedValue = Cfg.LauncherConfigFile["Launcher.Theme"];
+				Colors.SelectedIndex = Dictionaries.GetColor().Values.ToList().IndexOf(Cfg.LauncherConfigFile["Launcher.Color"]);
+				Themes.SelectedIndex = Dictionaries.GetTheme().Values.ToList().IndexOf(Cfg.LauncherConfigFile["Launcher.Theme"]);
 				Launch.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.LauncherConfigFile["Launcher.Close"]));
 				RandomCheck.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.LauncherConfigFile["Launcher.Random"]));
 				AutoDebug.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.LauncherConfigFile["Launcher.AutoDebug"]));
