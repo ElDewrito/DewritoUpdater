@@ -1561,12 +1561,12 @@ namespace Dewritwo
 		{
 			//Customization
 			NameBox.Text = Cfg.GetConfigVariable("Player.Name", "");
-			Weapon.SelectedValue = Cfg.GetConfigVariable("Player.RenderWeapon", "assault_rifle");
-			Helmet.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Helmet", "air_assault");
-			Chest.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Chest", "air_assault");
-			Shoulders.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Shoulders", "air_assault");
-			Arms.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Arms", "air_assault");
-			Legs.SelectedValue = Cfg.GetConfigVariable("Player.Armor.Legs", "air_assault");
+			Weapon.SelectedIndex = Dictionaries.GetWeapons().Values.ToList().IndexOf(Cfg.GetConfigVariable("Player.RenderWeapon", "assault_rifle"));
+			Helmet.SelectedIndex = Dictionaries.GetArmor().Values.ToList().IndexOf(Cfg.GetConfigVariable("Player.Armor.Helmet", "air_assault"));
+			Chest.SelectedIndex = Dictionaries.GetArmor().Values.ToList().IndexOf(Cfg.GetConfigVariable("Player.Armor.Chest", "air_assault"));
+			Shoulders.SelectedIndex = Dictionaries.GetArmor().Values.ToList().IndexOf(Cfg.GetConfigVariable("Player.Armor.Shoulders", "air_assault"));
+			Arms.SelectedIndex = Dictionaries.GetArmor().Values.ToList().IndexOf(Cfg.GetConfigVariable("Player.Armor.Arms", "air_assault"));
+			Legs.SelectedIndex = Dictionaries.GetArmor().Values.ToList().IndexOf(Cfg.GetConfigVariable("Player.Armor.Legs", "air_assault"));
 			var convertFromString1 = ColorConverter.ConvertFromString(Cfg.GetConfigVariable("Player.Colors.Primary", "#000000"));
 			if (convertFromString1 != null)
 				ClrPrimary.SelectedColor = (Color)convertFromString1;
