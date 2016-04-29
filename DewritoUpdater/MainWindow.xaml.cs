@@ -278,6 +278,12 @@ namespace Dewritwo
 					  BtnAction.Content = "Update";
 					  fade.Stop(); // Start animation
 				  });
+				BtnSkip.Dispatcher.Invoke(
+				  () =>
+				  {
+					  BtnSkip.Content = "Ignore";
+					  BtnSkip.Visibility = Visibility.Visible;
+				  });
 			}
 		}
 
