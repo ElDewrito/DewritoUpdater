@@ -1267,6 +1267,14 @@ namespace Dewritwo
 			Cfg.SaveConfigFile("dewrito_prefs.cfg", Cfg.ConfigFile);
 		}
 
+		private void ChkAssassination_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!IsLoaded)
+				return;
+			Cfg.SetVariable("Server.AssassinationEnabled", Convert.ToString(Convert.ToInt32(ChkAssassination.IsChecked)), ref Cfg.ConfigFile);
+			Cfg.SaveConfigFile("dewrito_prefs.cfg", Cfg.ConfigFile);
+		}
+
 		private void StartTimer_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
 			if (!IsLoaded)
