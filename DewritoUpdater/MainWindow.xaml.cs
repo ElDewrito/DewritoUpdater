@@ -20,7 +20,7 @@ using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json.Linq;
 
-namespace Dewritwo
+namespace DewritoUpdater
 {
 	public partial class MainWindow
 	{

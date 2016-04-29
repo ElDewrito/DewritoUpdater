@@ -7,7 +7,7 @@
     <ProjectGuid>{E6A3B3D5-30DC-4B68-9A5F-47A3F5B632E1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dewritwo</RootNamespace>
+    <RootNamespace>DewritoUpdater</RootNamespace>
     <AssemblyName>DewritoUpdater</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

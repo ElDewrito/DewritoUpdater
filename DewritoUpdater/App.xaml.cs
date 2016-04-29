@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Dewritwo
+namespace DewritoUpdater
 {
   /// <summary>
   ///   Interaction logic for App.xaml

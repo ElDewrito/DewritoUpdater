@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Dewritwo
+namespace DewritoUpdater
 {
 	internal class Dictionaries
 	{
