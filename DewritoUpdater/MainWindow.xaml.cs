@@ -19,6 +19,7 @@ using System.Windows.Media.Animation;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json.Linq;
+using DoritoPatcher;
 
 namespace DewritoUpdater
 {
@@ -1599,6 +1600,7 @@ namespace DewritoUpdater
 			MaxPlayer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.MaxPlayers", "16"));
 			StartTimer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.Countdown", "5"));
 			ChkSprint.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.SprintEnabled", "1")));
+			ChkAssassination.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.AssassinationEnabled", "1")));
 			//Launcher Settings
 			try
 			{
