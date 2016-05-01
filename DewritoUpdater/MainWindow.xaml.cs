@@ -19,7 +19,6 @@ using System.Windows.Media.Animation;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json.Linq;
-using DoritoPatcher;
 
 namespace DewritoUpdater
 {
@@ -1592,15 +1591,35 @@ namespace DewritoUpdater
 			if (convertFromString != null)
 				ClrHolo.SelectedColor = (Color)convertFromString;
 			//Settings
-			Fov.Value = Convert.ToDouble(Cfg.GetConfigVariable("Camera.FOV", "90.000000"));
-			CrosshairCenter.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Camera.Crosshair", "0")));
-			RawInput.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Input.RawInput", "1")));
-			ServerName.Text = Cfg.GetConfigVariable("Server.Name", "Halo Online Server");
-			ServerPassword.Password = Cfg.GetConfigVariable("Server.Password", "");
-			MaxPlayer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.MaxPlayers", "16"));
-			StartTimer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.Countdown", "5"));
-			ChkSprint.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.SprintEnabled", "1")));
-			ChkAssassination.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.AssassinationEnabled", "1")));
+			//Every config value is try/catch'd so that if it fails to parse it doesn't throw everything out.
+			//This is hacky as fuck but I don't have the time to rewrite this in a more effecient way
+			try {
+				Fov.Value = Convert.ToDouble(Cfg.GetConfigVariable("Camera.FOV", "90.000000"));
+			} catch { }
+			try {
+				CrosshairCenter.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Camera.Crosshair", "0")));
+			} catch { }
+			try {
+				RawInput.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Input.RawInput", "1")));
+			} catch { }
+			try {
+				ServerName.Text = Cfg.GetConfigVariable("Server.Name", "Halo Online Server");
+			} catch { }
+			try {
+				ServerPassword.Password = Cfg.GetConfigVariable("Server.Password", "");
+			} catch { }
+			try {
+				MaxPlayer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.MaxPlayers", "16"));
+			} catch { }
+			try {
+				StartTimer.Value = Convert.ToDouble(Cfg.GetConfigVariable("Server.Countdown", "5"));
+			} catch { }
+			try {
+				ChkSprint.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.SprintEnabled", "1")));
+			} catch { }
+			try {
+				ChkAssassination.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("Server.AssassinationEnabled", "1")));
+			} catch { }
 			//Launcher Settings
 			try
 			{
@@ -1616,12 +1635,24 @@ namespace DewritoUpdater
 			}
 
 			//VoIP Settings
-			ChkVoIpEnabled.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.Enabled", "1")));
-			Agc.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.AGC", "1")));
-			Echo.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.EchoCancellation", "1")));
-			VolumeModifier.Value = Convert.ToDouble(Cfg.GetConfigVariable("VoIP.VolumeModifier", "6"));
-			Ptt.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.PushToTalk", "1")));
-			Val.Value = Convert.ToDouble(Cfg.GetConfigVariable("VoIP.VoiceActivationLevel", "-45.000000"));
+			try {
+				ChkVoIpEnabled.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.Enabled", "1")));
+			} catch { }
+			try {
+				Agc.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.AGC", "1")));
+			} catch { }
+			try {
+				Echo.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.EchoCancellation", "1")));
+			} catch { }
+			try {
+				VolumeModifier.Value = Convert.ToDouble(Cfg.GetConfigVariable("VoIP.VolumeModifier", "6"));
+			} catch { }
+			try {
+				Ptt.IsChecked = Convert.ToBoolean(Convert.ToInt32(Cfg.GetConfigVariable("VoIP.PushToTalk", "1")));
+			} catch { }
+			try {
+				Val.Value = Convert.ToDouble(Cfg.GetConfigVariable("VoIP.VoiceActivationLevel", "-45.000000"));
+			} catch { }
 			//Auto Exec
 			if (!File.Exists("autoexec.cfg"))
 				File.Create("autoexec.cfg");
