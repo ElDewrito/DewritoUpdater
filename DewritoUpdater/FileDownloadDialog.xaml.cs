@@ -106,13 +106,12 @@ namespace DewritoUpdater
 
                     Close();
                 };
-
-                var filePath = Path.GetDirectoryName(destPath);
-                if (!Directory.Exists(filePath))
-                    Directory.CreateDirectory(filePath);
-
-                wc.DownloadFileAsync(new Uri(url), destPath);
             };
+            var filePath = Path.GetDirectoryName(destPath);
+            if (!Directory.Exists(filePath))
+                Directory.CreateDirectory(filePath);
+
+			wc.DownloadFileAsync(new Uri(url), destPath);
         }
     }
 }

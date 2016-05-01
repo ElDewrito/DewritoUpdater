@@ -776,24 +776,26 @@ namespace DewritoUpdater
 					var url = "http://eldewrito.anvilonline.net/" + _eldoritoLatestVersion + "/" + file;
 					var destPath = Path.Combine(BasePath, file);
 					var dialog = new FileDownloadDialog(this, url, destPath);
-					//var result = dialog.ShowDialog();
+					var result = dialog.ShowDialog();
 					//Update(destPath, url, file);
-
-					AppendDebugLine("Download for file \"" + file + "\" failed.", Color.FromRgb(255, 0, 0));
-					AppendDebugLine("Error: " + dialog.Error.Message, Color.FromRgb(255, 0, 0));
-					Dispatcher.Invoke(() =>
+					if (dialog.Error != null)
 					{
-						BtnAction.Content = "Error";
-						BtnSkip.Content = "Ignore";
-						if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+						AppendDebugLine("Download for file \"" + file + "\" (" + url + ") failed.", Color.FromRgb(255, 0, 0));
+						AppendDebugLine("Error: " + dialog.Error.Message, Color.FromRgb(255, 0, 0));
+						Dispatcher.Invoke(() =>
 						{
-							FlyoutHandler(FlyoutDebug);
-						}
-					});
+							BtnAction.Content = "Error";
+							BtnSkip.Content = "Ignore";
+							if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") && Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+							{
+								FlyoutHandler(FlyoutDebug);
+							}
+						});
 
-					if (dialog.Error.InnerException != null)
-						AppendDebugLine("Error: " + dialog.Error.InnerException.Message, Color.FromRgb(255, 0, 0));
-					return;
+						if (dialog.Error.InnerException != null)
+							AppendDebugLine("Error: " + dialog.Error.InnerException.Message, Color.FromRgb(255, 0, 0));
+						return;
+					}
 				}
 
 				if (_filesToDownload.Contains("DewritoUpdater.exe"))
