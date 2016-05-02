@@ -252,6 +252,7 @@ namespace DewritoUpdater
 						FlyoutHandler(FlyoutDebug);
 					}
 				});
+				return;
 			}
 
 			if (_filesToDownload.Count <= 0)
@@ -381,11 +382,7 @@ namespace DewritoUpdater
 
 				return true;
 			}
-			catch (WebException)
-			{
-				return false;
-			}
-			catch (NullReferenceException)
+			catch
 			{
 				return false;
 			}
@@ -393,6 +390,23 @@ namespace DewritoUpdater
 
 		private bool GetPatchFiles(string node, ref List<string> files)
 		{
+			//Make sure that _dewbackup exists.
+			if (!File.Exists("_dewbackup"))
+			{
+				AppendDebugLine("_dewbackup directory is missing. Please redownload ElDewrito.", Color.FromRgb(255, 0, 0));
+				Dispatcher.Invoke(() =>
+				{
+					BtnAction.Content = "Error";
+					BtnSkip.Content = "Ignore";
+					if (Cfg.LauncherConfigFile.ContainsKey("Launcher.AutoDebug") &&
+						Cfg.LauncherConfigFile["Launcher.AutoDebug"] == "0")
+					{
+						FlyoutHandler(FlyoutDebug);
+					}
+				});
+				return false;
+			}
+
 			foreach (var file in _latestUpdate[node])
 			{
 				var fileName = (string)file;
