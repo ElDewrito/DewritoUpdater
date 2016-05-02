@@ -391,7 +391,7 @@ namespace DewritoUpdater
 		private bool GetPatchFiles(string node, ref List<string> files)
 		{
 			//Make sure that _dewbackup exists.
-			if (!File.Exists("_dewbackup"))
+			if (!Directory.Exists("_dewbackup"))
 			{
 				AppendDebugLine("_dewbackup directory is missing. Please redownload ElDewrito.", Color.FromRgb(255, 0, 0));
 				Dispatcher.Invoke(() =>
