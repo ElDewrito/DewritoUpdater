@@ -157,7 +157,7 @@ namespace DewritoUpdater
 				try
 				{
 					ChangelogContent.Text =
-					  wc.DownloadString("https://raw.githubusercontent.com/no1dead/DewritoUpdater/master/changelog.data");
+					  wc.DownloadString("http://eldewrito.anvilonline.net/changelog.data");
 				}
 				catch
 				{
